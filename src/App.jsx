@@ -10,7 +10,6 @@ import ImageModal from './components/ImageModal/ImageModal';
 import styles from './App.module.css';
 
 const API_URL = 'https://api.unsplash.com/search/photos';
-// const API_KEY = 'oOFDUY7zXVw_UfqcOk-14cExKxLgoyC9sCOphYsS4HM';
 const API_KEY = 'r-tYbkV6tgOq4IxCQoeuywAIQeXocFjGz3mDUQHE-QY';
 
 const App = () => {
@@ -28,27 +27,50 @@ const App = () => {
       setIsLoading(true);
       setError(null);
 
-      try {
-        const response = await axios.get(API_URL, {
-          params: {
-            query,
-            page,
-            per_page: 12,
-          },
-          headers: {
-            Authorization: `Client-ID ${API_KEY}`,
-          },
-        });
-        if (page === 1) {
-          setImages(response.data.results);
-        } else {
-          setImages((prevImages) => [...prevImages, ...response.data.results]);
-        }
-      } catch (err) {
-        setError('Failed to load images. Please try again later.');
-      } finally {
-        setIsLoading(false);
-      }
+try {
+  const response = await axios.get(API_URL, {
+    params: {
+      query,
+      page,
+      per_page: 12,
+    },
+    headers: {
+      Authorization: `Client-ID ${API_KEY}`,
+    },
+  });
+  if (page === 1) {
+    setImages(response.data.results);
+  } else {
+    setImages((prevImages) => [...prevImages, ...response.data.results]);
+  }
+} catch (err) {
+  console.error('Error fetching images:', err); // Додатковий лог для налагодження
+  setError('Failed to load images. Please try again later.');
+} finally {
+  setIsLoading(false);
+}
+
+      // try {
+      //   const response = await axios.get(API_URL, {
+      //     params: {
+      //       query,
+      //       page,
+      //       per_page: 12,
+      //     },
+      //     headers: {
+      //       Authorization: `Client-ID ${API_KEY}`,
+      //     },
+      //   });
+      //   if (page === 1) {
+      //     setImages(response.data.results);
+      //   } else {
+      //     setImages((prevImages) => [...prevImages, ...response.data.results]);
+      //   }
+      // } catch (err) {
+      //   setError('Failed to load images. Please try again later.');
+      // } finally {
+      //   setIsLoading(false);
+      // }
     };
 
     fetchImages();
@@ -64,12 +86,39 @@ const App = () => {
   };
 
   // const openModal = (image) => setModalData(image);
-  const openModal = (image) => {
-  if (modalData) return; 
-  setModalData(image);
-  };
   
-  const closeModal = () => setModalData(null);
+//   const openModal = (image) => {
+//   if (modalData) {
+//     return;
+//   }
+//   setModalData(image);
+// };
+  
+  const openModal = (image) => {
+  if (modalData) {
+    console.log('Modal is already open.');
+    return;
+  }
+  console.log('Opening modal for image:', image);
+  setModalData(image);
+};
+
+const closeModal = () => {
+  console.log('Closing modal.');
+  setModalData(null);
+};
+  
+  // const closeModal = () => setModalData(null);
+
+  
+
+  {modalData && (
+  <ImageModal
+    key={modalData.id} 
+    data={modalData}
+    onClose={closeModal}
+  />
+)}
   
   // {modalData && <ImageModal data={modalData} onClose={closeModal} />}
 
