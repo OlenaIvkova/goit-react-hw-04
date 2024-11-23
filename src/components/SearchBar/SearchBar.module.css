@@ -1,25 +1,31 @@
 .searchBar {
-  background-color: #6200ea;
+  background-color: darkblue;
   padding: 15px;
-  color: white;
+  color: black;
 }
 
 .form {
   display: flex;
   justify-content: center;
-  gap: 10px;
+}
+
+.input-container {
+  position: relative;
+  width: 50px;
 }
 
 input {
-  padding: 10px;
+  padding: 10px 40px 10px 10px; 
   font-size: 16px;
   border-radius: 5px;
   border: none;
-  width: 300px;
+  width: 40%;
+  margin-right: 20px;
 }
 
+
 button {
-  background-color: #ff5722;
+  background-color: blue;
   border: none;
   color: white;
   padding: 10px 15px;

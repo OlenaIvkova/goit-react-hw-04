@@ -44,33 +44,11 @@ try {
     setImages((prevImages) => [...prevImages, ...response.data.results]);
   }
 } catch (err) {
-  console.error('Error fetching images:', err); // Додатковий лог для налагодження
+  console.error('Error fetching images:', err); 
   setError('Failed to load images. Please try again later.');
 } finally {
   setIsLoading(false);
 }
-
-      // try {
-      //   const response = await axios.get(API_URL, {
-      //     params: {
-      //       query,
-      //       page,
-      //       per_page: 12,
-      //     },
-      //     headers: {
-      //       Authorization: `Client-ID ${API_KEY}`,
-      //     },
-      //   });
-      //   if (page === 1) {
-      //     setImages(response.data.results);
-      //   } else {
-      //     setImages((prevImages) => [...prevImages, ...response.data.results]);
-      //   }
-      // } catch (err) {
-      //   setError('Failed to load images. Please try again later.');
-      // } finally {
-      //   setIsLoading(false);
-      // }
     };
 
     fetchImages();
@@ -84,15 +62,6 @@ try {
     setQuery(searchQuery);
     setPage(1);
   };
-
-  // const openModal = (image) => setModalData(image);
-  
-//   const openModal = (image) => {
-//   if (modalData) {
-//     return;
-//   }
-//   setModalData(image);
-// };
   
   const openModal = (image) => {
   if (modalData) {
@@ -107,10 +76,6 @@ const closeModal = () => {
   console.log('Closing modal.');
   setModalData(null);
 };
-  
-  // const closeModal = () => setModalData(null);
-
-  
 
   {modalData && (
   <ImageModal
@@ -119,8 +84,6 @@ const closeModal = () => {
     onClose={closeModal}
   />
 )}
-  
-  // {modalData && <ImageModal data={modalData} onClose={closeModal} />}
 
   return (
   <div className={styles.app}>

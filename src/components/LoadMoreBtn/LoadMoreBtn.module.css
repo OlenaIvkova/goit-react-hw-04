@@ -1,5 +1,5 @@
 .loadMore {
-  background-color: #6200ea;
+  background-color: darkblue;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -12,5 +12,5 @@
 }
 
 .loadMore:hover {
-  background-color: #3700b3;
+  background-color: blue;
 }
